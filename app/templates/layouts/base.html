@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Flask Blog App {% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mdb.min.css') }}">
+</head>
+<body style="background-image: url('/static/images/bg-pc.jpg'); 
+             background-repeat: no-repeat;
+             background-size: cover;
+             background-position: top;
+             background-attachment: fixed;">
+
+   
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <!-- Container wrapper -->
+  <div class="container">
+
+    <!-- Toggle button -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-mdb-toggle="collapse"
+      data-mdb-target="#navbarButtonsExample"
+      aria-controls="navbarButtonsExample"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarButtonsExample">
+      <!-- Left links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{{ url_for('index') }}">HOME</a>
+        </li>
+      </ul>
+      
+      <!-- Left links -->
+
+      <div class="d-flex align-items-center">
+        <a href="{{ url_for('login') }}" class="decoration-none px-3 me-2 text-white">LOGIN</a>
+        <a href="{{ url_for('register') }}" class="decoration-none px-3 me-2 text-white">REGISTER</a>
+        <a href="{{ url_for('about') }}" class="decoration-none px-3 me-2 text-white">ABOUT</a>
+      </div>
+    </div>
+    <!-- Collapsible wrapper -->
+  </div>
+  <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
+    
+    <div class="container mt-3">
+
+        <div class="p-5 mb-4 bg-dark rounded-3">
+          <div class="container-fluid py-3">
+              <h1 class="display-4 fw-bold text-white">FLASK BLOG-App</h1>
+              <p class="col-md-8 fs-4 text-white">Welcome to this platform, enjoy all the cool latest posts here authored by some of the best geeks in the industry.</p>
+          </div>
+        </div>
+      
+
+        <div class="row justify-content-center">
+
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-success">
+                            {{ message }}
+                        </div>
+                        
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
+            {% block content %}
+
+            {% endblock %}
+
+            <footer class="bg-light text-center text-lg-start rounded-3 mb-2">
+              <!-- Copyright -->
+              <div class="text-center p-3" style="background-color: rgba(223, 215, 215, 0.2);">
+                © 2021 Copyright:
+                <a class="text-dark" href="">khumbochilamwa.com</a>
+              </div>
+              <!-- Copyright -->
+            </footer>
+                 
+            
+        </div>
+
+    </div>
+
+    
+
+    <script src="{{ url_for('static', filename='js/mdb.min.js') }}"></script>
+    
+
+</body>
+</html>

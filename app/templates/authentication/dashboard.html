@@ -1,0 +1,35 @@
+{% extends 'layouts/master.html' %}
+
+
+{% block title %} Dashboard {% endblock %}
+
+
+{% block content %}
+
+    {% if posts|length < 1  %}
+        <div class="card card-default">
+            <div class="card-header font-weight-bold">Posts</div>
+
+            <div class="card-body">
+                <p>You have not created any posts</p>
+            </div>
+        </div>
+    {% else %}
+
+    <div class="card card-default">
+        <div class="card-header font-weight-bold">Posts</div>
+
+        <div class="card-body">
+            <ul class="list-group">
+                {% for post in posts %}
+                    <li class="list-group-item"><a href="{{ url_for('post_view', id=post.id) }}"><h4>{{ post.title|title }}</h4></a>
+                        <a href="{{ url_for('edit_post', id=post.id) }}" class="btn btn-sm btn-primary">Edit</a>
+                        <a href="{{ url_for('confirm', id=post.id) }}" class="btn btn-sm btn-danger">Delete</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+
+{% endblock %}

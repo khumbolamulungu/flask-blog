@@ -1,0 +1,16 @@
+{% extends 'layouts/master.html' %}
+
+
+{% block title %} Profile {% endblock %}
+
+
+{% block content %}
+
+    <div class="p-5 mb-4 bg-light rounded-3">
+        
+            <h4>{{ user.username|upper }}</h4>
+            <small>{{ user.email }} {{ moment(user.member_since).format('L') }}</small><br>
+            
+    </div>
+
+{% endblock %}

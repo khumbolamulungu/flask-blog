@@ -1,0 +1,95 @@
+{% extends 'layouts/base.html' %}
+
+
+
+{% block title %} Register {% endblock %}
+
+
+{% block content %}
+
+<div class="col-md-5 mt-5 mb-4">
+    <div class="card card-default">
+      <div class="card-header pb-2 font-weight-bold bg-light" style="background-color: rgb(206, 195, 195);">
+        <h3>Register</h3>
+    </div>
+    
+        <div class="card-body">
+            <form method="POST">
+              {{ form.csrf_token }}
+                <!-- Username input -->
+                <div class="form-outline mb-4">
+                    {{ form.username(class="form-control") }}
+                    {{ form.username.label(class="form-label") }}
+                  </div>
+
+                  {% if form.username.errors %}
+                    {% for error in form.username.errors %}
+                      <div class="alert alert-danger">
+                        {{ error }}
+                      </div>
+                    {% endfor %}
+                  {% endif %}
+
+        
+                <!-- Email input -->
+                <div class="form-outline mb-4">
+                    {{ form.email(class="form-control") }}
+                    {{ form.email.label(class="form-label") }}
+                </div>
+
+               
+                  {% if form.email.errors %}
+                    {% for error in form.email.errors %}
+                      <div class="alert alert-danger">
+                        {{ error }}
+                      </div>
+                    {% endfor %}
+                  {% endif %}
+                
+
+                
+              
+                <!-- Password input -->
+                <div class="form-outline mb-4">
+                  {{ form.password1(class="form-control") }}
+                  {{ form.password1.label(class="form-label") }}
+                </div>
+
+                
+
+                
+                  {% if form.password1.errors %}
+                    {% for error in form.password1.errors %}
+                      <div class="alert alert-danger">
+                        {{ error }}
+                      </div>
+                    {% endfor %}
+                  {% endif %}
+                
+    
+                <!-- Confirm Password input -->
+
+                <div class="form-outline mb-4">
+                  {{ form.password2(class="form-control") }}
+                  {{ form.password2.label(class="form-label") }}
+                </div>
+
+            
+                    {% if form.password2.errors %}
+                      {% for error in form.password2.errors %}
+                        <div class="alert alert-danger">
+                          {{ error }}
+                        </div>
+                      {% endfor %}
+                    {% endif %}
+                 
+              
+                
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary btn-block">Sign up</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

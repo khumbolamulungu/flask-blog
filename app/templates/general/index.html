@@ -1,0 +1,50 @@
+{% extends 'layouts/base.html' %}
+
+
+{% block title %} Home {% endblock %}
+
+
+{% block content %}
+
+
+    {% if posts.items|length < 1 %}
+        <div class="p-5 mb-4 bg-light rounded-3">
+            <p class="lead">There are no <strong>Posts</strong> at the moment</p>
+        </div>
+    {% else %}
+
+        <div class="p-5 mb-4 bg-light rounded-3">
+            {% for post in posts.items %}
+                <h4>{{ post.title|upper }}</h4>
+                <small><b>{{ post.description|upper }}</b></small><br>
+                <small>{{ post.body|truncate(50)|safe }} <a href="{{ url_for('post', id=post.id) }}">Read More</a> </small><br>
+                <small>Comments <span class="badge bg-primary rounded-5"><b class="text-white">{{ post.comments.count() }}</b></span></small>
+                <hr>
+            {% endfor%}
+
+
+            <!-- pagination -->
+            <div class="text-right">
+                <a href="{{ url_for('index', page=posts.prev_num) }}" class="btn btn-sm btn-outline-dark {% if posts.page==1 %} disabled {% endif %}">&laquo;</a>
+
+                {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                    {% if page_num %}
+                        {% if posts.page==page_num %}
+                            <a href="{{ url_for('index', page=page_num) }}" class="btn btn-sm btn-dark">{{ page_num }}</a>
+                        {% else %}
+                            <a href="{{ url_for('index', page=page_num) }}" class="btn btn-sm btn-outline-dark">{{ page_num }}</a>
+                        {% endif %}
+                    {% else %}
+                        ...
+                    {% endif %}
+                {% endfor %}
+                
+                <a href="{{ url_for('index', page=posts.next_num) }}" class="btn btn-sm btn-outline-dark {% if posts.page==posts.pages %}disabled{% endif %}">&raquo;</a>
+
+            </div>
+
+        </div>
+    
+        {% endif %}
+
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'layouts/master.html' %}
+
+
+{% block title %} Add Post {% endblock %}
+
+
+
+{% block content %}
+
+<div class="card card-default">
+    <div class="card-header font-weight-bold">Add Post</div>
+
+    <div class="card-body">
+        <form method="POST">
+          {{ form.csrf_token }}
+            <!-- Title input -->
+            <div class="form-outline mb-4">
+                {{ form.title(class="form-control") }}
+                {{ form.title.label(class="form-label") }}
+              </div>
+
+              {% if form.title.errors %}
+                {% for error in form.title.errors %}
+                  <div class="alert alert-danger">
+                    {{ error }}
+                  </div>
+                {% endfor %}
+              {% endif %}
+
+    
+            <!-- Description input -->
+            <div class="form-outline mb-4">
+                {{ form.description(class="form-control") }}
+                {{ form.description.label(class="form-label") }}
+            </div>
+
+           
+              {% if form.description.errors %}
+                {% for error in form.description.errors %}
+                  <div class="alert alert-danger">
+                    {{ error }}
+                  </div>
+                {% endfor %}
+              {% endif %}
+            
+
+            
+          
+            <!-- Body input -->
+            <div class="form-outline mb-4">
+              {{ form.body(class="form-control") }}
+              {{ form.body.label(class="form-label") }}
+            </div>
+
+            
+
+            
+              {% if form.body.errors %}
+                {% for error in form.body.errors %}
+                  <div class="alert alert-danger">
+                    {{ error }}
+                  </div>
+                {% endfor %}
+              {% endif %}
+
+            
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary btn-block">Add Post</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
